@@ -1,0 +1,100 @@
+
+
+
+#include <LiquidCrystal.h>  //For the LCD Display
+const int rs = 12, en = 11, d4 = 7, d5 = 6, d6 = 5, d7 =0;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+
+
+int redled=2;
+int greenled=3;
+int blueled=4;
+
+int value=A0;
+int red;
+int blue;
+int green;
+
+int redvalue;
+int greenvalue;
+int bluevalue;
+
+int redout=8;
+int greenout=9;
+int blueout=10;
+
+
+void setup() {
+  lcd.begin(16, 2);
+
+  Serial.begin(9600);
+  pinMode(redled,OUTPUT);
+  pinMode(greenled,OUTPUT);
+  pinMode(blueled,OUTPUT);
+
+  pinMode(value,INPUT);
+  pinMode(redout,OUTPUT);
+  pinMode(greenout,OUTPUT);
+  pinMode(blueout,OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  digitalWrite(redled,HIGH);
+  delay(40);
+  red=analogRead(value);
+  delay(10);
+  Serial.print("R=");
+  Serial.println(red);
+  digitalWrite(redled,LOW);
+
+   digitalWrite(greenled,HIGH);
+  delay(40);
+  green=analogRead(value);
+  delay(10);
+  Serial.print("G=");
+  Serial.println(green);
+  digitalWrite(greenled,LOW);
+
+  digitalWrite(blueled,HIGH);
+  delay(40);
+  blue=analogRead(value);
+  delay(10);
+  Serial.print("B=");
+  Serial.println(blue);
+  digitalWrite(blueled,LOW);
+
+ 
+   if (red> green & & red>blue)
+   {
+     redvalue=HIGH;
+   } 
+   else
+
+   redvalue=LOW;
+
+
+  if (blue> green & & blue>green)
+
+   {
+     bluevalue=HIGH;
+   } 
+   else
+   bluevalue=LOW;
+
+
+   if (green> blue & & green>red)
+   {
+     greenvalue=HIGH;
+   } 
+   else
+
+   greenvalue=LOW;
+
+   
+  digitalWrite(redout,redvalue);
+  digitalWrite(greenout,greenvalue);
+  digitalWrite(blueout,bluevalue);
+  
+  
+}
